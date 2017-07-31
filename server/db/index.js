@@ -13,10 +13,16 @@ var Show = db.define('show', {
   rating: {
     type: Sequelize.FLOAT,
     allowNull: false
+  },
+  image: {
+    type: Sequelize.STRING,
+    allowNull: true
   }
 })
 
 //create table
 Show.sync();
 
-module.exports = Show;
+module.exports = {
+  Show: Show
+}

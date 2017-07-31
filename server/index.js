@@ -4,9 +4,9 @@ var cors = require('cors');
 var path = require('path');
 
 //file dependencies
-require('./db');
+var router = require('./routes');
 require('./db/config');
-//var router = require('./routes');
+require('./db');
 
 //setting up express
 var PORT = 3000;
@@ -17,7 +17,7 @@ app.use(parser.json());
 app.use(parser.urlencoded({extended: true}));
 
 //set up routes
-//app.use('/api', router);
+app.use('/api', router);
 
 //set up server
 app.listen(PORT, function(err){
