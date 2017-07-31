@@ -4,7 +4,9 @@ var cors = require('cors');
 var path = require('path');
 
 //file dependencies
-var router = require('./routes');
+require('./db');
+require('./db/config');
+//var router = require('./routes');
 
 //setting up express
 var PORT = 3000;

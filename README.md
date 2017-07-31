@@ -1,2 +1,2 @@
 # HR_MVP
-MVP project using spotify_api
+MVP project using tvamze_api
