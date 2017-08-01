@@ -37,8 +37,8 @@ class App extends Component {
     axios.post('/api/shows/addShow', {title:input})
       .then(res => {
         alert('successfully added!');
-        // this.state.shows.push(res);
-        this.setState({shows: [...this.state.shows, res.data]})
+        this.state.shows.push(res.data);
+        this.setState({shows: this.state.shows});
       })
       .catch(err => {
         console.log('error in posting ', err);
@@ -47,7 +47,15 @@ class App extends Component {
   handleDeleteRequest(input) {
     axios.delete('/api/shows/deleteShow', {data:{title: input}})
       .then(res => {
-        console.log('delete successful');
+        var newArr;
+        this.state.shows.forEach((show, index) => {
+          if (show.title === input) {
+            var arr1 = this.state.shows.slice(0, index);
+            var arr2 = this.state.shows.slice(index+1);
+            newArr = arr1.concat(arr2);
+          }
+        })
+        this.setState({shows: newArr});
         alert('delete successful!')
       })
       .catch(err => {
@@ -73,7 +81,7 @@ class App extends Component {
   render() {
     return (
       <div className="container">
-        <h1>TV show catalog</h1>
+        <h1>showmark <i className="fa fa-television" aria-hidden="true"></i></h1>
           <ShowInput shows={this.state.shows} handlePostRequest={this.handlePostRequest} />
           <ShowList shows={this.state.shows} handleDeleteRequest={this.handleDeleteRequest} handleUpdateRequest={this.handleUpdateRequest} toggle={this.state.toggle}/>
            {/* {this.state.shows ? <ShowList shows={this.state.shows}/> : null }    */}

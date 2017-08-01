@@ -1,5 +1,6 @@
 h1, form {
-  text-align: center
+  text-align: center;
+  color: #141414;
 }
 
 .showimg {
@@ -28,4 +29,8 @@ img {
 body {
   background: #faebd7;
   color: #141414
+}
+
+.edit {
+  margin: 2px
 }

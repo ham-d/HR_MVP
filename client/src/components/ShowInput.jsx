@@ -34,7 +34,7 @@ class ShowInput extends Component {
       <div>
         <form>
           <input onChange={this.handleInputChange} type="text"></input>
-          <button onClick={(e) => {e.preventDefault(); this.props.handlePostRequest(this.state.inputVal)}}>Add Show</button>
+          <button onClick={(e) => {e.preventDefault(); this.props.handlePostRequest(this.state.inputVal); this.setState({inputVal: ''})}}>Add Show</button>
         </form>
       </div>
     );

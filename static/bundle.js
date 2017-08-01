@@ -23202,8 +23202,6 @@ var _ShowInput2 = _interopRequireDefault(_ShowInput);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -23254,8 +23252,8 @@ var App = function (_Component) {
 
       _axios2.default.post('/api/shows/addShow', { title: input }).then(function (res) {
         alert('successfully added!');
-        // this.state.shows.push(res);
-        _this3.setState({ shows: [].concat(_toConsumableArray(_this3.state.shows), [res.data]) });
+        _this3.state.shows.push(res.data);
+        _this3.setState({ shows: _this3.state.shows });
       }).catch(function (err) {
         console.log('error in posting ', err);
       });
@@ -23263,8 +23261,18 @@ var App = function (_Component) {
   }, {
     key: 'handleDeleteRequest',
     value: function handleDeleteRequest(input) {
+      var _this4 = this;
+
       _axios2.default.delete('/api/shows/deleteShow', { data: { title: input } }).then(function (res) {
-        console.log('delete successful');
+        var newArr;
+        _this4.state.shows.forEach(function (show, index) {
+          if (show.title === input) {
+            var arr1 = _this4.state.shows.slice(0, index);
+            var arr2 = _this4.state.shows.slice(index + 1);
+            newArr = arr1.concat(arr2);
+          }
+        });
+        _this4.setState({ shows: newArr });
         alert('delete successful!');
       }).catch(function (err) {
         console.log('delete unsuccessful', err);
@@ -23273,16 +23281,16 @@ var App = function (_Component) {
   }, {
     key: 'handleUpdateRequest',
     value: function handleUpdateRequest(title) {
-      var _this4 = this;
+      var _this5 = this;
 
       var userRating = prompt('please enter a new rating');
       _axios2.default.put('/api/shows/editRating', { title: title, rating: userRating }).then(function (res) {
-        _this4.state.shows.forEach(function (show, index) {
+        _this5.state.shows.forEach(function (show, index) {
           if (show.title === res.data.title) {
-            _this4.state.shows[index] = res.data;
+            _this5.state.shows[index] = res.data;
           }
         });
-        _this4.setState({ shows: _this4.state.shows });
+        _this5.setState({ shows: _this5.state.shows });
       }).catch(function (err) {
         console.log('update unsuccessful', err);
       });
@@ -23296,7 +23304,8 @@ var App = function (_Component) {
         _react2.default.createElement(
           'h1',
           null,
-          'TV show catalog'
+          'showmark ',
+          _react2.default.createElement('i', { className: 'fa fa-television', 'aria-hidden': 'true' })
         ),
         _react2.default.createElement(_ShowInput2.default, { shows: this.state.shows, handlePostRequest: this.handlePostRequest }),
         _react2.default.createElement(_ShowList2.default, { shows: this.state.shows, handleDeleteRequest: this.handleDeleteRequest, handleUpdateRequest: this.handleUpdateRequest, toggle: this.state.toggle })
@@ -24357,19 +24366,19 @@ var Show = function Show(props) {
       _react2.default.createElement(
         "p",
         null,
-        "rating: ",
+        "Rating: ",
         props.show.rating
       ),
       _react2.default.createElement(
         "button",
-        { onClick: function onClick() {
+        { className: "btn btn-warning edit", onClick: function onClick() {
             props.handleUpdateRequest(props.show.title);
           } },
-        "update show"
+        "update rating"
       ),
       _react2.default.createElement(
         "button",
-        { onClick: function onClick() {
+        { className: "btn btn-danger edit", onClick: function onClick() {
             props.handleDeleteRequest(props.show.title);
           } },
         "delete show"
@@ -24462,7 +24471,7 @@ var ShowInput = function (_Component) {
           _react2.default.createElement(
             'button',
             { onClick: function onClick(e) {
-                e.preventDefault();_this2.props.handlePostRequest(_this2.state.inputVal);
+                e.preventDefault();_this2.props.handlePostRequest(_this2.state.inputVal);_this2.setState({ inputVal: '' });
               } },
             'Add Show'
           )

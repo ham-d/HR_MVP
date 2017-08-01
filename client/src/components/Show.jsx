@@ -7,9 +7,9 @@ const Show = (props) => {
         <img src={props.show.image} />
         <p>Title: {props.show.title}</p>
         <p>Genre(s): {props.show.genre}</p>
-        <p>rating: {props.show.rating}</p>
-        <button onClick={() => {props.handleUpdateRequest(props.show.title)}}>update show</button>
-        <button onClick={() => {props.handleDeleteRequest(props.show.title)}}>delete show</button>
+        <p>Rating: {props.show.rating}</p>
+        <button className="btn btn-warning edit" onClick={() => {props.handleUpdateRequest(props.show.title)}}>update rating</button>
+        <button className="btn btn-danger edit" onClick={() => {props.handleDeleteRequest(props.show.title)}}>delete show</button>
       </div>
     </div>
   );
