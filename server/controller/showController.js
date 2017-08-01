@@ -4,6 +4,7 @@ var axios = require('axios');
 var fetchAllShows = function(req, res) {
   db.Show.findAll({})
     .then(function(data){
+      console.log('here is server data: ', data)
       res.status(200).json(data);
     })
     .catch(function(err) {
@@ -25,7 +26,7 @@ var addShow = function(req, res) {
         .spread(function(newShow, created) {
           if (created) {
             res.status(201).send(newShow);
-            console.log('show added!');
+            console.log('show added!', newShow);
           } else {
             res.status(500).send('show already in database');
             console.log('show already in database');

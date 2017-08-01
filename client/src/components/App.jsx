@@ -26,7 +26,7 @@ class App extends Component {
   handleGetAllRequest() {
     axios.get('/api/shows/fetchAllShows')
       .then(res => {
-        console.log('here is the res ', res);
+        console.log('here is the res in get', res.data);
         this.setState({shows: res.data});
       })
       .catch(err => {
@@ -36,6 +36,7 @@ class App extends Component {
   handlePostRequest(input) {
     axios.post('/api/shows/addShow', {title:input})
       .then(res => {
+        console.log('this is the res.data: ', res.data);
         alert('successfully added!');
         this.state.shows.push(res.data);
         this.setState({shows: this.state.shows});

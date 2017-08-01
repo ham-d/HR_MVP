@@ -1,6 +1,6 @@
 h1, form {
   text-align: center;
-  color: #141414;
+  color: #1a1a1a
 }
 
 .showimg {
@@ -23,12 +23,12 @@ form {
 }
 
 img {
-  margin-top: 10px
+  margin-bottom: 10px
 }
 
 body {
-  background: #faebd7;
-  color: #141414
+  background-image: url('../images/woodbg.jpg'); 
+  color: #F5F5F5
 }
 
 .edit {

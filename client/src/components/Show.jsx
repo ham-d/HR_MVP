@@ -4,8 +4,9 @@ const Show = (props) => {
   return (
     <div>
       <div className="col-sm-3 text-center">
+        <h4>{props.show.title}</h4>
         <img src={props.show.image} />
-        <p>Title: {props.show.title}</p>
+        
         <p>Genre(s): {props.show.genre}</p>
         <p>Rating: {props.show.rating}</p>
         <button className="btn btn-warning edit" onClick={() => {props.handleUpdateRequest(props.show.title)}}>update rating</button>

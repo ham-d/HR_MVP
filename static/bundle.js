@@ -23239,7 +23239,7 @@ var App = function (_Component) {
       var _this2 = this;
 
       _axios2.default.get('/api/shows/fetchAllShows').then(function (res) {
-        console.log('here is the res ', res);
+        console.log('here is the res in get', res.data);
         _this2.setState({ shows: res.data });
       }).catch(function (err) {
         console.log('error in client ', err);
@@ -23251,6 +23251,7 @@ var App = function (_Component) {
       var _this3 = this;
 
       _axios2.default.post('/api/shows/addShow', { title: input }).then(function (res) {
+        console.log('this is the res.data: ', res.data);
         alert('successfully added!');
         _this3.state.shows.push(res.data);
         _this3.setState({ shows: _this3.state.shows });
@@ -24350,13 +24351,12 @@ var Show = function Show(props) {
     _react2.default.createElement(
       "div",
       { className: "col-sm-3 text-center" },
-      _react2.default.createElement("img", { src: props.show.image }),
       _react2.default.createElement(
-        "p",
+        "h4",
         null,
-        "Title: ",
         props.show.title
       ),
+      _react2.default.createElement("img", { src: props.show.image }),
       _react2.default.createElement(
         "p",
         null,
@@ -24471,7 +24471,7 @@ var ShowInput = function (_Component) {
           _react2.default.createElement(
             'button',
             { onClick: function onClick(e) {
-                e.preventDefault();_this2.props.handlePostRequest(_this2.state.inputVal);_this2.setState({ inputVal: '' });
+                e.preventDefault();_this2.props.handlePostRequest(_this2.state.inputVal);
               } },
             'Add Show'
           )
