@@ -51,8 +51,20 @@ var editRating = function(req, res) {
     }
   )
     .then(function(affectedRows) {
-      res.status(200).send(`${affectedRows} rows updated`);
       console.log(`${affectedRows} rows updated`);
+      db.Show.findAll({
+        where: {
+          title: req.body.title
+        }
+      })
+        .then(data => {
+          res.status(200).json(data[0].dataValues);
+          console.log('sending updated data to client', data[0].dataValues);
+        })
+        .catch(err => {
+          res.status(500).send(err);
+          console.log('error in sending updated data to client');
+        })
     })
     .catch(function(err) {
       res.status(500).send(err);
@@ -66,7 +78,7 @@ var deleteShow = function(req, res) {
     }
   })
     .then(function(affectedRows) {
-      res.status(200).send(`${affectedRows} rows deleted`)
+      res.status(200).send(`${affectedRows} rows deleted`);
       console.log(`${afftectedRows} deleted`);
     })
     .catch(function(err) {

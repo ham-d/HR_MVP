@@ -11,7 +11,7 @@ require('./db');
 //setting up express
 var PORT = 3000;
 var app = express();
-app.use(express.static(path.join(__dirname, '../client/static')));
+app.use(express.static(path.join(__dirname, '../static')));
 app.use(cors());
 app.use(parser.json());
 app.use(parser.urlencoded({extended: true}));
